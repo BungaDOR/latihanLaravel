@@ -11,5 +11,5 @@ Route::get('/hello', function () {
 });
 
 Route::get('/nama', function () {
-    return "Watashi wa Bunga desu";
+    return "Hello, nama saya Bungaaa";
 });
