@@ -15,7 +15,36 @@ class RuanganController extends Controller
 
     public function store(Request $request)
     {
-        Ruangan::create($request->only('nama', 'kapasitas'));
+        Ruangan::create($request->only('nama', 'deskripsi'));
         return redirect()->back();
     }
-}
+
+    // edit
+    public function edit($id)
+    {
+        $ruangan = Ruangan::findOrFail($id);
+        return view('ruangan.edit', compact('ruangan'));
+    }
+
+    // Update
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'nama' => 'required',
+            'kapasitas' => 'required'
+        ]);
+
+        $ruangan = Ruangan::findOrFail($id);
+        $ruangan->update($request->only('nama', 'kapasitas'));
+
+        return redirect()->route('ruangan.index')->with('success','Data berhasil diupdate!');
+    }
+
+    // Delete
+    public function destroy($id)
+    {
+        $ruangan = Ruangan::findOrFail($id);
+        $ruangan->delete();
+
+        return redirect()->route('ruangan.index')->with('success', 'Data berhasil dihapus!');
+}}
