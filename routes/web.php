@@ -5,6 +5,8 @@ use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\RuanganController;
 use App\Http\Controllers\MataKuliahController;
 use App\Http\Controllers\DosenController;
+use App\Http\Controllers\Auth\StudentRegisterController;
+use App\Http\Controllers\EkycController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -35,6 +37,29 @@ Route::middleware('auth')->group(function () {
 
     // dosen
     Route::resource('dosen', DosenController::class);
+
+    // Register mahasiswa
+    Route::get('/register-mahasiswa', [StudentRegisterController::class, 'showRegistrationForm'])
+    ->name('register.mahasiswa');
+    Route::post('/register-mahasiswa', [StudentRegisterController::class, 'register']);
+
+    // Step 1
+    Route::middleware(['auth'])->prefix('ekyc')->group(function () {
+        Route::get('step1', [EkycController::class, 'step1'])->name('ekyc.step1');
+        Route::post('step1', [EkycController::class, 'storeStep1'])->name('ekyc.storeStep1');
+
+        // sementara redirect kosong untuk step2
+        Route::get('/ekyc/step2', [EkycController::class, 'step2'])->name('ekyc.step2');
+        Route::post('/ekyc/step2', [EkycController::class,'storeStep2'])->name('ekyc.storeStep2');
+
+        // Step3
+        Route::get('/ekyc/step3', [EkycController::class, 'showStep3'])->name('ekyc.step3');
+        Route::post('/ekyc/step3', [EkycController::class, 'storeStep3'])->name('ekyc.storeStep3');
+
+         // Step4
+        Route::get('/ekyc/step4', [EkycController::class, 'showStep4'])->name('ekyc.step4');
+        Route::post('/ekyc/step4', [EkycController::class, 'storeStep4'])->name('ekyc.storeStep4');
+    });
 });
 
 require __DIR__.'/auth.php';
