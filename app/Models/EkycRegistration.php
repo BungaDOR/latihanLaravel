@@ -27,7 +27,7 @@ class EkycRegistration extends Model
         'kota',
         'kecamatan',
         'kode_pos',
-        'nama_ibu',
+        'nama_ibu_kandung',
         'referensi',
     ];
 
