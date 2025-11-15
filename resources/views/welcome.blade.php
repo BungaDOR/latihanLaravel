@@ -52,7 +52,7 @@ html
 
             <!-- Image -->
             <div class="flex justify-center">
-                <img src="https://lp3i.ac.id/wp-content/uploads/2023/06/hero_lp3i.png"
+                <img src="storage/image/landing/hero-lp3i.jpg"
                      alt="Mahasiswa LP3I"
                      class="w-full max-w-xl object-cover drop-shadow-xl" />
             </div>
@@ -100,7 +100,7 @@ html
                 </p>
             </div>
 
-            <img src="https://lp3i.ac.id/wp-content/uploads/2023/06/lp3i-campus.png"
+            <img src="storage/image/landing/mahasiswa-lp3i.png"
                  class="rounded-xl shadow-lg" />
         </div>
     </section>
