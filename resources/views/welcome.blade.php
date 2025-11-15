@@ -1,4 +1,3 @@
-html
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -23,8 +22,32 @@ html
             </nav>
 
             <div class="flex gap-3">
-                <a href="#login" class="px-4 py-2 text-blue-600 font-semibold">Login</a>
-                <a href="#daftar" class="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700">Daftar</a>
+                @if (Route::has('login'))
+                    <nav class="flex items-center justify-end gap-4">
+                        @auth
+                            <a
+                                href="{{ url('/dashboard') }}"
+                                class="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700">
+                                Dashboard
+                            </a>
+                        @else
+                            <a
+                                href="{{ route('login') }}"
+                                class="px-4 py-2 text-blue-600 font-semibold">
+                                Log In
+                            </a>
+                        @if (Route::has('register'))
+                            <a
+                                href="{{ route('register') }}"
+                                class="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700">
+                                Register
+                            </a>
+                        @endif
+                    @endauth
+                </nav>
+            @endif
+                <!--<a href="#login" class="px-4 py-2 text-blue-600 font-semibold">Login</a>
+                <a href="#daftar" class="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700">Daftar</a>-->
             </div>
         </div>
     </header>
@@ -45,7 +68,14 @@ html
                 </p>
 
                 <div class="flex gap-4">
-                    <a href="#daftar" class="px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold text-lg hover:bg-blue-700 transition">Daftar Sekarang</a>
+                    @if (Route::has('register'))
+                            <a
+                                href="{{ route('register') }}"
+                                class="px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold text-lg hover:bg-blue-700">
+                                Daftar Sekarang
+                            </a>
+                        @endif
+                    <!--<a href="#daftar" class="px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold text-lg hover:bg-blue-700 transition">Daftar Sekarang</a> -->
                     <a href="#program" class="px-6 py-3 border border-blue-600 text-blue-600 rounded-lg font-semibold text-lg hover:bg-blue-50 transition">Lihat Program</a>
                 </div>
             </div>
