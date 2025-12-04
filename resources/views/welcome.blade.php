@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- konten : title -->
     <title>LP3I - Kampus Vokasi Terbaik</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -12,8 +13,9 @@
     <!-- NAVBAR -->
     <header class="w-full py-4 bg-white shadow-sm fixed top-0 left-0 z-50">
         <div class="max-w-7xl mx-auto flex justify-between items-center px-4">
+            <!-- konten : logo -->
             <h1 class="text-xl font-bold text-blue-600">LP3I</h1>
-
+            <!-- konten : navbar -->
             <nav class="hidden md:flex gap-6 text-gray-700 font-medium">
                 <a href="#beranda" class="hover:text-blue-600">Beranda</a>
                 <a href="#program" class="hover:text-blue-600">Program</a>
@@ -57,14 +59,14 @@
         <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 px-4 items-center">
 
             <!-- Text Content -->
+             <!-- konten : banner wording -->
             <div>
                 <h2 class="text-4xl md:text-5xl font-extrabold leading-tight text-gray-900 mb-6">
-                    Kampus Vokasi Terbaik <br />Untuk Masa Depan Karier Anda
+                    {{ $landing['hero_title'] ?? 'Kampus Vokasi Terbaik<br />Untuk Masa Depan Karier Anda' }}
                 </h2>
 
                 <p class="text-lg text-gray-600 mb-8">
-                    LP3I hadir dengan fokus pendidikan vokasi yang relevan dengan dunia kerja.
-                    Raih keterampilan praktis dan peluang karier lebih cepat bersama kami.
+                     {{!! $landing['hero_subtitle'] ?? 'Solusi Pendidikan Masa Depan' !!}}
                 </p>
 
                 <div class="flex gap-4">
@@ -82,7 +84,8 @@
 
             <!-- Image -->
             <div class="flex justify-center">
-                <img src="storage/image/landing/hero-lp3i.jpg"
+                <!-- konten : banner image -->
+                <img src="{{ asset('uploads/' . ($landing['hero_image'] ?? 'default-hero.png)) }}"
                      alt="Mahasiswa LP3I"
                      class="w-full max-w-xl object-cover drop-shadow-xl" />
             </div>
@@ -90,17 +93,19 @@
     </section>
 
     <!-- PROGRAM PENDIDIKAN -->
+     <!-- konten : programPendidikan -->
     <section id="program" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 text-center">
             <h3 class="text-3xl font-bold text-gray-900 mb-10">Program Pendidikan</h3>
 
             <div class="grid md:grid-cols-3 gap-8">
+            @foreach($programs as $program)
                 <div class="bg-gray-50 p-8 rounded-xl shadow-sm hover:shadow-lg transition">
-                    <h4 class="text-xl font-semibold mb-3">Administrasi Bisnis</h4>
-                    <p class="text-gray-600">Belajar pengelolaan bisnis, administrasi perkantoran, dan dunia manajemen modern.</p>
+                    <h4 class="text-xl font-semibold mb-3">{{ $program->name }}</h4>
+                    <p class="text-gray-600">{{ $program->description }}</p>
                 </div>
-
-                <div class="bg-gray-50 p-8 rounded-xl shadow-sm hover:shadow-lg transition">
+                @endforeach
+                <!-- <div class="bg-gray-50 p-8 rounded-xl shadow-sm hover:shadow-lg transition">
                     <h4 class="text-xl font-semibold mb-3">Informatika & Komputer</h4>
                     <p class="text-gray-600">Program vokasi untuk dunia IT: pemrograman, jaringan, data.</p>
                 </div>
@@ -108,12 +113,13 @@
                 <div class="bg-gray-50 p-8 rounded-xl shadow-sm hover:shadow-lg transition">
                     <h4 class="text-xl font-semibold mb-3">Digital Marketing</h4>
                     <p class="text-gray-600">Menguasai strategi pemasaran digital sesuai kebutuhan industri.</p>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
 
     <!-- TENTANG LP3I -->
+     <!-- konten : footer -->
     <section id="tentang" class="py-20 bg-gray-50">
         <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
 
@@ -162,7 +168,7 @@
         </div>
 
         <div class="text-center text-gray-200 mt-10 text-sm">
-            © 2025 LP3I. Semua Hak Dilindungi.
+            {{ $landing['fooster_text'] ?? '© 2025 LP3I College - All Rights Reserved' }}
         </div>
     </footer>
 
