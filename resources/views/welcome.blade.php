@@ -17,10 +17,11 @@
             <h1 class="text-xl font-bold text-blue-600">LP3I</h1>
             <!-- konten : navbar -->
             <nav class="hidden md:flex gap-6 text-gray-700 font-medium">
-                <a href="#beranda" class="hover:text-blue-600">Beranda</a>
-                <a href="#program" class="hover:text-blue-600">Program</a>
-                <a href="#tentang" class="hover:text-blue-600">Tentang</a>
-                <a href="#kontak" class="hover:text-blue-600">Kontak</a>
+                @foreach ($navigation as $nav)
+                <a href="{{ $nav->url }}" class="hover:text-blue-600">
+                    {{ $nav->label }}
+                </a>
+                @endforeach
             </nav>
 
             <div class="flex gap-3">
@@ -62,11 +63,11 @@
              <!-- konten : banner wording -->
             <div>
                 <h2 class="text-4xl md:text-5xl font-extrabold leading-tight text-gray-900 mb-6">
-                    {{ $landing['hero_title'] ?? 'Kampus Vokasi Terbaik<br />Untuk Masa Depan Karier Anda' }}
+                    {{ $landing['hero_title'] ?? 'Kampus Vokasi Terbaik <br />Untuk Masa Depan Karier Anda' }}
                 </h2>
 
                 <p class="text-lg text-gray-600 mb-8">
-                     {{!! $landing['hero_subtitle'] ?? 'Solusi Pendidikan Masa Depan' !!}}
+                    {!! $landing['hero_subtitle'] ?? 'Solusi Pendidikan Masa Depan' !!}
                 </p>
 
                 <div class="flex gap-4">
@@ -77,23 +78,24 @@
                                 Daftar Sekarang
                             </a>
                         @endif
-                    <!--<a href="#daftar" class="px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold text-lg hover:bg-blue-700 transition">Daftar Sekarang</a> -->
-                    <a href="#program" class="px-6 py-3 border border-blue-600 text-blue-600 rounded-lg font-semibold text-lg hover:bg-blue-50 transition">Lihat Program</a>
+                    <!--<a href="#daftar" class="px-6 py-3 bg-blue-600 text-white rounded-lg 
+                    font-semibold text-lg hover:bg-blue-700 transition">Daftar Sekarang</a> -->
+                    <a href="#program" class="px-6 py-3 border border-blue-600 text-blue-600 
+                    rounded-lg font-semibold text-lg hover:bg-blue-50 transition">Lihat Program</a>
                 </div>
             </div>
 
             <!-- Image -->
             <div class="flex justify-center">
                 <!-- konten : banner image -->
-                <img src="{{ asset('uploads/' . ($landing['hero_image'] ?? 'default-hero.png)) }}"
-                     alt="Mahasiswa LP3I"
-                     class="w-full max-w-xl object-cover drop-shadow-xl" />
+                <img src="{{ asset('storage/' . ($landing['hero_image'] ?? 'hero-lp3i.jpg')) }}" 
+                alt="Mahasiswa LP3I" class="w-full max-w-xl object-cover drop-shadow-xl" />
             </div>
         </div>
     </section>
 
     <!-- PROGRAM PENDIDIKAN -->
-     <!-- konten : programPendidikan -->
+    <!-- konten : programPendidikan -->
     <section id="program" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 text-center">
             <h3 class="text-3xl font-bold text-gray-900 mb-10">Program Pendidikan</h3>
@@ -104,7 +106,9 @@
                     <h4 class="text-xl font-semibold mb-3">{{ $program->name }}</h4>
                     <p class="text-gray-600">{{ $program->description }}</p>
                 </div>
-                @endforeach
+            @endforeach
+        </div>
+
                 <!-- <div class="bg-gray-50 p-8 rounded-xl shadow-sm hover:shadow-lg transition">
                     <h4 class="text-xl font-semibold mb-3">Informatika & Komputer</h4>
                     <p class="text-gray-600">Program vokasi untuk dunia IT: pemrograman, jaringan, data.</p>
@@ -112,14 +116,14 @@
 
                 <div class="bg-gray-50 p-8 rounded-xl shadow-sm hover:shadow-lg transition">
                     <h4 class="text-xl font-semibold mb-3">Digital Marketing</h4>
-                    <p class="text-gray-600">Menguasai strategi pemasaran digital sesuai kebutuhan industri.</p>
-                </div> -->
+                    <p class="text-gray-600">Menguasai strategi pemasaran digital sesuai kebutuhan industri.</p> -->
+                </div>
             </div>
         </div>
     </section>
 
     <!-- TENTANG LP3I -->
-     <!-- konten : footer -->
+    <!-- konten : tentang -->
     <section id="tentang" class="py-20 bg-gray-50">
         <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
 
@@ -136,12 +140,13 @@
                 </p>
             </div>
 
-            <img src="storage/image/landing/mahasiswa-lp3i.png"
+            <img src="storage/uploads/landing/mahasiswa-lp3i.png"
                  class="rounded-xl shadow-lg" />
         </div>
     </section>
 
     <!-- FOOTER -->
+    <!-- konten : footer -->
     <footer id="kontak" class="bg-blue-600 text-white py-10">
         <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-3 gap-10">
 
@@ -153,10 +158,11 @@
             <div>
                 <h4 class="text-xl font-semibold mb-3">Navigasi</h4>
                 <ul class="space-y-2 text-gray-100">
-                    <li><a href="#beranda" class="hover:underline">Beranda</a></li>
-                    <li><a href="#program" class="hover:underline">Program</a></li>
-                    <li><a href="#tentang" class="hover:underline">Tentang</a></li>
-                    <li><a href="#kontak" class="hover:underline">Kontak</a></li>
+                    @foreach ($footerNav as $itemNav)
+                        <li><a href="{{ $itemNav->url }}" class="hover:underline">
+                            {{ $itemNav->label }} 
+                        </a></li> 
+                        @endforeach
                 </ul>
             </div>
 
@@ -168,7 +174,7 @@
         </div>
 
         <div class="text-center text-gray-200 mt-10 text-sm">
-            {{ $landing['fooster_text'] ?? '© 2025 LP3I College - All Rights Reserved' }}
+            {{ $landing['footer_text'] ?? '© 2025 LP3I College - All Rights Reserved' }}
         </div>
     </footer>
 
